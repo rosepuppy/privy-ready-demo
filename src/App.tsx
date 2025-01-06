@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import ChildComponent from "./Component";
+import { PrivyProvider } from "@privy-io/react-auth";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PrivyProvider
+      appId={"cm4h9lfx101219avgt89vri65"}
+      config={{
+        loginMethods: ["telegram", "twitter"],
+        appearance: {
+          theme: "light",
+          accentColor: "#676FFF",
+        },
+      }}
+    >
+      <div className="App">
+        <ChildComponent />
+      </div>
+    </PrivyProvider>
   );
 }
 
