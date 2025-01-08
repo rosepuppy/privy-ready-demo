@@ -1,9 +1,15 @@
+import React, { useEffect } from "react";
 import { usePrivy, useSolanaWallets } from "@privy-io/react-auth";
-import React from "react";
 
 function ChildComponent() {
-  const { ready, wallets } = useSolanaWallets();
-  const { login, ready: privyReady } = usePrivy();
+  const { createWallet, wallets, ready } = useSolanaWallets();
+  const { authenticated, login, ready: privyReady } = usePrivy();
+
+  useEffect(() => {
+    if (authenticated && wallets.length === 0) {
+      createWallet();
+    }
+  }, [authenticated, createWallet, wallets]);
 
   return (
     <div>
