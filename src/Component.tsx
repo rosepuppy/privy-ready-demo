@@ -6,10 +6,16 @@ function ChildComponent() {
   const { authenticated, login, ready: privyReady } = usePrivy();
 
   useEffect(() => {
+    console.log("authenticated", authenticated);
+    console.log("wallets", wallets);
+    console.log("ready", ready);
+    console.log("privyReady", privyReady);
     if (authenticated && wallets.length === 0) {
-      createWallet();
+      createWallet().catch((error) => {
+        console.error("Error creating wallet", error);
+      });
     }
-  }, [authenticated, createWallet, wallets]);
+  }, [authenticated, createWallet, wallets, ready]);
 
   return (
     <div>
